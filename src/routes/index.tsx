@@ -145,6 +145,48 @@ function Index() {
 
       <section id="allocations" className="border-b border-border py-24 lg:py-32"><div className="mx-auto max-w-7xl px-5 lg:px-8"><div className="mb-12 flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><div><SectionLabel>Allocation book</SectionLabel><h2 className="text-3xl font-semibold sm:text-5xl">Under the umbrella.</h2></div><span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">Illustrative values · Demo Data</span></div><div className="grid gap-3 md:grid-cols-2 lg:grid-cols-5">{allocations.map((asset) => <article key={asset.symbol} className="capital-panel group rounded-lg p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/50"><div className="flex items-start justify-between"><div className="grid h-10 w-10 place-items-center rounded-sm bg-secondary font-mono text-xs text-primary">{asset.symbol}</div>{asset.up ? <ArrowUpRight className="h-4 w-4 text-primary"/> : <ArrowDownRight className="h-4 w-4 text-destructive"/>}</div><div className="mt-10 text-xs text-muted-foreground">{asset.name}</div><div className="mt-2 text-2xl font-semibold">{asset.allocation}%</div><div className="mt-5 border-t border-border pt-4"><div className="font-mono text-[10px] text-muted-foreground">{asset.value}</div><div className={asset.up ? "mt-2 font-mono text-[10px] text-primary" : "mt-2 font-mono text-[10px] text-destructive"}>{asset.trend}</div></div><div className="mt-6 font-mono text-[8px] uppercase tracking-[0.16em] text-terminal-muted">Under the Umbrella</div></article>)}</div></div></section>
 
+      <section id="contract" className="border-b border-border py-24 lg:py-32">
+        <div className="mx-auto max-w-7xl px-5 lg:px-8">
+          <SectionLabel>Token contract</SectionLabel>
+          <h2 className="text-3xl font-semibold sm:text-5xl">Meme Coin Contract</h2>
+          <div className="mt-10 max-w-3xl capital-panel rounded-lg p-6 sm:p-8">
+            <div className="flex items-center gap-3">
+              <Button
+                variant="terminal"
+                size="icon"
+                className="h-11 w-11 shrink-0"
+                disabled={!CONTRACT_ADDRESS}
+                aria-label="Copy contract address"
+                onClick={() => {
+                  if (CONTRACT_ADDRESS) {
+                    navigator.clipboard.writeText(CONTRACT_ADDRESS);
+                  }
+                }}
+              >
+                <Copy className="h-4 w-4" />
+              </Button>
+              <div className="flex min-w-0 flex-1 items-center rounded-md border border-border bg-background/50 px-4 py-3 font-mono text-sm">
+                {CONTRACT_ADDRESS ? (
+                  <span className="truncate text-primary">{CONTRACT_ADDRESS}</span>
+                ) : (
+                  <span className="text-muted-foreground">Contract address coming soon</span>
+                )}
+              </div>
+            </div>
+            {CONTRACT_ADDRESS && (
+              <a
+                href={`${ROBINHOOD_CHAIN_EXPLORER_URL}/address/${CONTRACT_ADDRESS}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-5 inline-flex items-center gap-1.5 text-sm text-primary transition-colors hover:text-primary/80"
+              >
+                View on Robinhood Chain explorer <ArrowUpRight className="h-3.5 w-3.5" />
+              </a>
+            )}
+          </div>
+        </div>
+      </section>
+
       <section className="border-b border-border py-24 lg:py-36"><div className="mx-auto grid max-w-7xl gap-14 px-5 lg:grid-cols-[.55fr_1fr] lg:px-8"><div><SectionLabel>Manifesto</SectionLabel><BarChart3 className="h-16 w-16 text-primary/30" /></div><blockquote className="max-w-3xl text-2xl font-medium leading-[1.55] sm:text-4xl"><p>Markets change. Narratives rotate. Volatility arrives without warning.</p><p className="mt-8 text-muted-foreground">Umbrella Capital is built around a simple idea: capital should have structure when conditions become uncertain.</p><p className="mt-8 text-primary">One canopy. Multiple assets. A desk that allocates instead of panicking.</p></blockquote></div></section>
 
       <section id="community" className="py-24 lg:py-32"><div className="mx-auto max-w-7xl px-5 lg:px-8"><div className="relative overflow-hidden rounded-lg border border-primary/30 bg-accent/40 p-7 sm:p-12 lg:p-16"><div className="scanline absolute inset-x-0 top-0 h-px"/><div className="grid gap-12 lg:grid-cols-2 lg:items-end"><div><SectionLabel>Community treasury</SectionLabel><h2 className="max-w-lg text-4xl font-semibold sm:text-6xl">Capital under one canopy.</h2></div><div className="grid gap-4 sm:grid-cols-2">{['Transparent allocations','On-chain treasury visibility','Community-focused structure','ETH and tokenized equity exposure','Dynamic allocation narrative'].map((item) => <div key={item} className="flex items-center gap-3 text-sm"><span className="grid h-5 w-5 shrink-0 place-items-center rounded-full border border-primary/40"><Check className="h-3 w-3 text-primary"/></span>{item}</div>)}</div></div></div></div></section>
