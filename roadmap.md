@@ -4,4 +4,4 @@
 - [x] Build responsive landing page and treasury dashboard
 - [x] Add demo allocation and market condition views
 - [x] Add required narrative, manifesto, community, and risk content
-- [ ] Verify build and responsive rendering
+- [x] Verify build and responsive rendering
