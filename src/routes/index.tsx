@@ -54,9 +54,18 @@ function UmbrellaMark({ compact = false }: { compact?: boolean }) {
   return (
     <div className="flex items-center gap-3" aria-label="Umbrella Capital">
       <svg className={compact ? "h-8 w-8" : "h-12 w-12"} viewBox="0 0 48 48" fill="none" aria-hidden="true">
-        <path d="M5 23C6.8 12.3 14.4 6 24 6s17.2 6.3 19 17c-3.8-2.7-7.2-2.7-10.4 0-3.1-2.7-5.9-2.7-8.6 0-2.7-2.7-5.6-2.7-8.7 0C12 20.3 8.6 20.3 5 23Z" fill="currentColor" className="text-primary"/>
-        <path d="M24 22v15.2c0 3.1 1.9 4.8 4.5 4.8 2.4 0 4-1.4 4.5-3.6" stroke="currentColor" strokeWidth="3" strokeLinecap="round" className="text-foreground"/>
-        <path d="M24 6v16" stroke="currentColor" strokeWidth="2" className="text-background"/>
+        <g stroke="#000" strokeWidth="1.2" strokeLinejoin="round">
+          <path d="M24 26 L5 26 A19 19 0 0 1 6.45 18.73 Z" fill="currentColor" className="text-primary"/>
+          <path d="M24 26 L6.45 18.73 A19 19 0 0 1 10.56 12.56 Z" fill="#fff"/>
+          <path d="M24 26 L10.56 12.56 A19 19 0 0 1 16.73 8.45 Z" fill="currentColor" className="text-primary"/>
+          <path d="M24 26 L16.73 8.45 A19 19 0 0 1 24 7 Z" fill="#fff"/>
+          <path d="M24 26 L24 7 A19 19 0 0 1 31.27 8.45 Z" fill="currentColor" className="text-primary"/>
+          <path d="M24 26 L31.27 8.45 A19 19 0 0 1 37.44 12.56 Z" fill="#fff"/>
+          <path d="M24 26 L37.44 12.56 A19 19 0 0 1 41.55 18.73 Z" fill="currentColor" className="text-primary"/>
+          <path d="M24 26 L41.55 18.73 A19 19 0 0 1 43 26 Z" fill="#fff"/>
+        </g>
+        <path d="M5 26 H43" stroke="#000" strokeWidth="1.6"/>
+        <path d="M24 19.5 L27 24 L24 28.5 L21 24 Z" fill="currentColor" className="text-primary" stroke="#000" strokeWidth="1.2" strokeLinejoin="round"/>
       </svg>
       <div className="leading-none">
         <span className={`${compact ? "text-sm" : "text-lg"} block font-semibold uppercase tracking-[0.16em] text-foreground`}>Umbrella</span>
