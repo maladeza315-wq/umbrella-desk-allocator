@@ -1,3 +1,4 @@
+import * as React from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import {
   ArrowDownRight,
@@ -84,6 +85,52 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   return <div className="mb-5 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-primary"><span className="h-px w-8 bg-primary" />{children}</div>;
 }
 
+function shortenAddress(address: string) {
+  return `${address.slice(0, 6)}...${address.slice(-4)}`;
+}
+
+function ContractAddress() {
+  const [copied, setCopied] = React.useState(false);
+
+  const handleCopy = () => {
+    if (!CONTRACT_ADDRESS) return;
+    navigator.clipboard.writeText(CONTRACT_ADDRESS);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  };
+
+  return (
+    <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-3 py-1.5 backdrop-blur-sm">
+      <button
+        type="button"
+        onClick={handleCopy}
+        disabled={!CONTRACT_ADDRESS}
+        aria-label={CONTRACT_ADDRESS ? "Copy contract address" : "Contract address coming soon"}
+        className="grid h-6 w-6 place-items-center rounded-full border border-border bg-background text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary disabled:cursor-not-allowed disabled:opacity-40"
+      >
+        {copied ? <Check className="h-3 w-3 text-primary" /> : <Copy className="h-3 w-3" />}
+      </button>
+      <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+        {CONTRACT_ADDRESS ? (
+          <>
+            CA{" "}
+            <a
+              href={`${ROBINHOOD_CHAIN_EXPLORER_URL}/address/${CONTRACT_ADDRESS}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary transition-colors hover:text-primary/80"
+            >
+              {shortenAddress(CONTRACT_ADDRESS)}
+            </a>
+          </>
+        ) : (
+          "CA: Coming soon"
+        )}
+      </span>
+    </div>
+  );
+}
+
 function Index() {
   return (
     <main className="min-h-screen overflow-hidden bg-background text-foreground">
@@ -94,7 +141,6 @@ function Index() {
             <a className="transition-colors hover:text-primary" href="#treasury">Treasury</a>
             <a className="transition-colors hover:text-primary" href="#allocations">Allocations</a>
             <a className="transition-colors hover:text-primary" href="#how">How It Works</a>
-            <a className="transition-colors hover:text-primary" href="#contract">Contract</a>
             <a className="transition-colors hover:text-primary" href="#community">Community</a>
           </nav>
           <Badge variant="outline" className="border-primary/30 bg-primary/5 py-2 font-mono text-[10px] uppercase tracking-wider text-primary">
@@ -108,7 +154,10 @@ function Index() {
         <div className="relative mx-auto w-full max-w-7xl px-5 py-20 lg:px-8">
           <div className="mx-auto max-w-5xl text-center">
             <div className="mb-10 inline-flex animate-drift"><UmbrellaMark /></div>
-            <Badge variant="outline" className="mb-8 border-border bg-card/60 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Powered by Robinhood Chain</Badge>
+            <Badge variant="outline" className="mb-5 border-border bg-card/60 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Powered by Robinhood Chain</Badge>
+            <div className="mb-8">
+              <ContractAddress />
+            </div>
             <h1 className="text-balance text-5xl font-semibold leading-[1.02] tracking-normal sm:text-7xl lg:text-[96px]">When it rains, <span className="text-primary">we allocate.</span></h1>
             <p className="mx-auto mt-7 max-w-2xl text-balance text-base leading-7 text-muted-foreground sm:text-lg">An on-chain treasury for ETH, tokenized equities, and strategic capital allocation on Robinhood Chain.</p>
             <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
@@ -159,53 +208,12 @@ function Index() {
 
       <section id="allocations" className="border-b border-border py-24 lg:py-32"><div className="mx-auto max-w-7xl px-5 lg:px-8"><div className="mb-12 flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><div><SectionLabel>Allocation book</SectionLabel><h2 className="text-3xl font-semibold sm:text-5xl">Under the umbrella.</h2></div><span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">Illustrative values · Demo Data</span></div><div className="grid gap-3 md:grid-cols-2 lg:grid-cols-5">{allocations.map((asset) => <article key={asset.symbol} className="capital-panel group rounded-lg p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/50"><div className="flex items-start justify-between"><div className="grid h-10 w-10 place-items-center rounded-sm bg-secondary font-mono text-xs text-primary">{asset.symbol}</div>{asset.up ? <ArrowUpRight className="h-4 w-4 text-primary"/> : <ArrowDownRight className="h-4 w-4 text-destructive"/>}</div><div className="mt-10 text-xs text-muted-foreground">{asset.name}</div><div className="mt-2 text-2xl font-semibold">{asset.allocation}%</div><div className="mt-5 border-t border-border pt-4"><div className="font-mono text-[10px] text-muted-foreground">{asset.value}</div><div className={asset.up ? "mt-2 font-mono text-[10px] text-primary" : "mt-2 font-mono text-[10px] text-destructive"}>{asset.trend}</div></div><div className="mt-6 font-mono text-[8px] uppercase tracking-[0.16em] text-terminal-muted">Under the Umbrella</div></article>)}</div></div></section>
 
-      <section id="contract" className="border-b border-border py-24 lg:py-32">
-        <div className="mx-auto max-w-7xl px-5 lg:px-8">
-          <SectionLabel>Token contract</SectionLabel>
-          <h2 className="text-3xl font-semibold sm:text-5xl">Meme Coin Contract</h2>
-          <div className="mt-10 max-w-3xl capital-panel rounded-lg p-6 sm:p-8">
-            <div className="flex items-center gap-3">
-              <Button
-                variant="terminal"
-                size="icon"
-                className="h-11 w-11 shrink-0"
-                disabled={!CONTRACT_ADDRESS}
-                aria-label="Copy contract address"
-                onClick={() => {
-                  if (CONTRACT_ADDRESS) {
-                    navigator.clipboard.writeText(CONTRACT_ADDRESS);
-                  }
-                }}
-              >
-                <Copy className="h-4 w-4" />
-              </Button>
-              <div className="flex min-w-0 flex-1 items-center rounded-md border border-border bg-background/50 px-4 py-3 font-mono text-sm">
-                {CONTRACT_ADDRESS ? (
-                  <span className="truncate text-primary">{CONTRACT_ADDRESS}</span>
-                ) : (
-                  <span className="text-muted-foreground">Contract address coming soon</span>
-                )}
-              </div>
-            </div>
-            {CONTRACT_ADDRESS && (
-              <a
-                href={`${ROBINHOOD_CHAIN_EXPLORER_URL}/address/${CONTRACT_ADDRESS}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-5 inline-flex items-center gap-1.5 text-sm text-primary transition-colors hover:text-primary/80"
-              >
-                View on Robinhood Chain explorer <ArrowUpRight className="h-3.5 w-3.5" />
-              </a>
-            )}
-          </div>
-        </div>
-      </section>
 
       <section className="border-b border-border py-24 lg:py-36"><div className="mx-auto grid max-w-7xl gap-14 px-5 lg:grid-cols-[.55fr_1fr] lg:px-8"><div><SectionLabel>Manifesto</SectionLabel><BarChart3 className="h-16 w-16 text-primary/30" /></div><blockquote className="max-w-3xl text-2xl font-medium leading-[1.55] sm:text-4xl"><p>Markets change. Narratives rotate. Volatility arrives without warning.</p><p className="mt-8 text-muted-foreground">Umbrella Capital is built around a simple idea: capital should have structure when conditions become uncertain.</p><p className="mt-8 text-primary">One canopy. Multiple assets. A desk that allocates instead of panicking.</p></blockquote></div></section>
 
       <section id="community" className="py-24 lg:py-32"><div className="mx-auto max-w-7xl px-5 lg:px-8"><div className="relative overflow-hidden rounded-lg border border-primary/30 bg-accent/40 p-7 sm:p-12 lg:p-16"><div className="scanline absolute inset-x-0 top-0 h-px"/><div className="grid gap-12 lg:grid-cols-2 lg:items-end"><div><SectionLabel>Community treasury</SectionLabel><h2 className="max-w-lg text-4xl font-semibold sm:text-6xl">Capital under one canopy.</h2></div><div className="grid gap-4 sm:grid-cols-2">{['Transparent allocations','On-chain treasury visibility','Community-focused structure','ETH and tokenized equity exposure','Dynamic allocation narrative'].map((item) => <div key={item} className="flex items-center gap-3 text-sm"><span className="grid h-5 w-5 shrink-0 place-items-center rounded-full border border-primary/40"><Check className="h-3 w-3 text-primary"/></span>{item}</div>)}</div></div></div></div></section>
 
-      <footer className="border-t border-border bg-card/50"><div className="mx-auto max-w-7xl px-5 py-12 lg:px-8"><div className="flex flex-col justify-between gap-8 border-b border-border pb-10 md:flex-row md:items-center"><UmbrellaMark compact/><div className="flex flex-wrap gap-x-6 gap-y-3 text-xs text-muted-foreground"><a href="#treasury" className="hover:text-primary">Treasury</a><a href="#allocations" className="hover:text-primary">Allocations</a><a href="#how" className="hover:text-primary">How It Works</a><a href="#contract" className="hover:text-primary">Contract</a><a href="#community" className="hover:text-primary">Community</a><span className="text-border">/</span><a href="#" aria-label="X social placeholder" className="hover:text-primary">X</a><a href="#" aria-label="Discord social placeholder" className="hover:text-primary">Discord</a></div><Badge variant="outline" className="w-fit border-primary/30 font-mono text-[9px] uppercase text-primary">Robinhood Chain</Badge></div><div className="mt-8 flex flex-col gap-5 md:flex-row md:justify-between"><p className="max-w-4xl text-[10px] leading-5 text-muted-foreground">Umbrella Capital is an experimental on-chain treasury concept. Digital assets and tokenized assets involve significant risk, including loss of value. Nothing on this website is financial advice, a guarantee of returns, or an offer to buy or sell securities. Treasury data shown in demo mode is illustrative only.</p><span className="shrink-0 font-mono text-[9px] uppercase tracking-widest text-muted-foreground">© 2026 Umbrella Capital</span></div></div></footer>
+      <footer className="border-t border-border bg-card/50"><div className="mx-auto max-w-7xl px-5 py-12 lg:px-8"><div className="flex flex-col justify-between gap-8 border-b border-border pb-10 md:flex-row md:items-center"><UmbrellaMark compact/><div className="flex flex-wrap gap-x-6 gap-y-3 text-xs text-muted-foreground"><a href="#treasury" className="hover:text-primary">Treasury</a><a href="#allocations" className="hover:text-primary">Allocations</a><a href="#how" className="hover:text-primary">How It Works</a><a href="#community" className="hover:text-primary">Community</a><span className="text-border">/</span><a href="#" aria-label="X social placeholder" className="hover:text-primary">X</a><a href="#" aria-label="Discord social placeholder" className="hover:text-primary">Discord</a></div><Badge variant="outline" className="w-fit border-primary/30 font-mono text-[9px] uppercase text-primary">Robinhood Chain</Badge></div><div className="mt-8 flex flex-col gap-5 md:flex-row md:justify-between"><p className="max-w-4xl text-[10px] leading-5 text-muted-foreground">Umbrella Capital is an experimental on-chain treasury concept. Digital assets and tokenized assets involve significant risk, including loss of value. Nothing on this website is financial advice, a guarantee of returns, or an offer to buy or sell securities. Treasury data shown in demo mode is illustrative only.</p><span className="shrink-0 font-mono text-[9px] uppercase tracking-widest text-muted-foreground">© 2026 Umbrella Capital</span></div></div></footer>
     </main>
   );
 }
