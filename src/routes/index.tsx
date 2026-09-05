@@ -53,19 +53,34 @@ const allocations = [
 function UmbrellaMark({ compact = false }: { compact?: boolean }) {
   return (
     <div className="flex items-center gap-3" aria-label="Umbrella Capital">
-      <svg className={compact ? "h-8 w-8" : "h-12 w-12"} viewBox="0 0 48 48" fill="none" aria-hidden="true">
+      <svg
+        className={`${compact ? "h-8 w-8" : "h-12 w-12"} overflow-visible`}
+        viewBox="4 3 40 27"
+        preserveAspectRatio="xMidYMid meet"
+        fill="none"
+        aria-hidden="true"
+      >
+        {/* full canopy: 8 radial facets, alternating emerald / white */}
         <g stroke="#000" strokeWidth="1.2" strokeLinejoin="round">
-          <path d="M24 26 L5 26 A19 19 0 0 1 6.45 18.73 Z" fill="currentColor" className="text-primary"/>
-          <path d="M24 26 L6.45 18.73 A19 19 0 0 1 10.56 12.56 Z" fill="#fff"/>
-          <path d="M24 26 L10.56 12.56 A19 19 0 0 1 16.73 8.45 Z" fill="currentColor" className="text-primary"/>
-          <path d="M24 26 L16.73 8.45 A19 19 0 0 1 24 7 Z" fill="#fff"/>
-          <path d="M24 26 L24 7 A19 19 0 0 1 31.27 8.45 Z" fill="currentColor" className="text-primary"/>
-          <path d="M24 26 L31.27 8.45 A19 19 0 0 1 37.44 12.56 Z" fill="#fff"/>
-          <path d="M24 26 L37.44 12.56 A19 19 0 0 1 41.55 18.73 Z" fill="currentColor" className="text-primary"/>
-          <path d="M24 26 L41.55 18.73 A19 19 0 0 1 43 26 Z" fill="#fff"/>
+          <path d="M24 25 L7 25 A17 17 0 0 1 8.29 18.49 Z" fill="currentColor" className="text-primary"/>
+          <path d="M24 25 L8.29 18.49 A17 17 0 0 1 11.98 12.98 Z" fill="#fff"/>
+          <path d="M24 25 L11.98 12.98 A17 17 0 0 1 17.49 9.29 Z" fill="currentColor" className="text-primary"/>
+          <path d="M24 25 L17.49 9.29 A17 17 0 0 1 24 8 Z" fill="#fff"/>
+          <path d="M24 25 L24 8 A17 17 0 0 1 30.51 9.29 Z" fill="currentColor" className="text-primary"/>
+          <path d="M24 25 L30.51 9.29 A17 17 0 0 1 36.02 12.98 Z" fill="#fff"/>
+          <path d="M24 25 L36.02 12.98 A17 17 0 0 1 39.71 18.49 Z" fill="currentColor" className="text-primary"/>
+          <path d="M24 25 L39.71 18.49 A17 17 0 0 1 41 25 Z" fill="#fff"/>
         </g>
-        <path d="M5 26 H43" stroke="#000" strokeWidth="1.6"/>
-        <path d="M24 19.5 L27 24 L24 28.5 L21 24 Z" fill="currentColor" className="text-primary" stroke="#000" strokeWidth="1.2" strokeLinejoin="round"/>
+        {/* scalloped lower edge — the complete bottom half of the canopy */}
+        <g stroke="#000" strokeWidth="1.2" strokeLinejoin="round">
+          <path d="M7 25 A4.5 4.5 0 0 1 15.5 25 Z" fill="currentColor" className="text-primary"/>
+          <path d="M15.5 25 A4.5 4.5 0 0 1 24 25 Z" fill="#fff"/>
+          <path d="M24 25 A4.5 4.5 0 0 1 32.5 25 Z" fill="#fff"/>
+          <path d="M32.5 25 A4.5 4.5 0 0 1 41 25 Z" fill="currentColor" className="text-primary"/>
+        </g>
+        <path d="M7 25 H41" stroke="#000" strokeWidth="1.6"/>
+        {/* central diamond */}
+        <path d="M24 17.5 L26.8 21 L24 24.5 L21.2 21 Z" fill="currentColor" className="text-primary" stroke="#000" strokeWidth="1.2" strokeLinejoin="round"/>
       </svg>
       <div className="leading-none">
         <span className={`${compact ? "text-sm" : "text-lg"} block font-semibold uppercase tracking-[0.16em] text-foreground`}>Umbrella</span>
