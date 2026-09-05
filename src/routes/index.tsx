@@ -55,32 +55,22 @@ function UmbrellaMark({ compact = false }: { compact?: boolean }) {
     <div className="flex items-center gap-3" aria-label="Umbrella Capital">
       <svg
         className={`${compact ? "h-8 w-8" : "h-12 w-12"} overflow-visible`}
-        viewBox="4 3 40 27"
+        viewBox="3.5 3.5 41 41"
         preserveAspectRatio="xMidYMid meet"
         fill="none"
         aria-hidden="true"
       >
-        {/* full canopy: 8 radial facets, alternating emerald / white */}
-        <g stroke="#000" strokeWidth="1.2" strokeLinejoin="round">
-          <path d="M24 25 L7 25 A17 17 0 0 1 8.29 18.49 Z" fill="currentColor" className="text-primary"/>
-          <path d="M24 25 L8.29 18.49 A17 17 0 0 1 11.98 12.98 Z" fill="#fff"/>
-          <path d="M24 25 L11.98 12.98 A17 17 0 0 1 17.49 9.29 Z" fill="currentColor" className="text-primary"/>
-          <path d="M24 25 L17.49 9.29 A17 17 0 0 1 24 8 Z" fill="#fff"/>
-          <path d="M24 25 L24 8 A17 17 0 0 1 30.51 9.29 Z" fill="currentColor" className="text-primary"/>
-          <path d="M24 25 L30.51 9.29 A17 17 0 0 1 36.02 12.98 Z" fill="#fff"/>
-          <path d="M24 25 L36.02 12.98 A17 17 0 0 1 39.71 18.49 Z" fill="currentColor" className="text-primary"/>
-          <path d="M24 25 L39.71 18.49 A17 17 0 0 1 41 25 Z" fill="#fff"/>
+        {/* 8 curved wedges meeting at one central point; emerald at top/right/bottom/left, white on the diagonals */}
+        <g stroke="#000" strokeWidth="0.9" strokeLinejoin="round">
+          <path d="M24 24 L42.48 16.35 Q36.44 11.56 31.65 5.52 Z" fill="#fff"/>
+          <path d="M24 24 L31.65 5.52 Q24 6.4 16.35 5.52 Z" fill="currentColor" className="text-primary"/>
+          <path d="M24 24 L16.35 5.52 Q11.56 11.56 5.52 16.35 Z" fill="#fff"/>
+          <path d="M24 24 L5.52 16.35 Q6.4 24 5.52 31.65 Z" fill="currentColor" className="text-primary"/>
+          <path d="M24 24 L5.52 31.65 Q11.56 36.44 16.35 42.48 Z" fill="#fff"/>
+          <path d="M24 24 L16.35 42.48 Q24 41.6 31.65 42.48 Z" fill="currentColor" className="text-primary"/>
+          <path d="M24 24 L31.65 42.48 Q36.44 36.44 42.48 31.65 Z" fill="#fff"/>
+          <path d="M24 24 L42.48 31.65 Q41.6 24 42.48 16.35 Z" fill="currentColor" className="text-primary"/>
         </g>
-        {/* scalloped lower edge — the complete bottom half of the canopy */}
-        <g stroke="#000" strokeWidth="1.2" strokeLinejoin="round">
-          <path d="M7 25 A4.5 4.5 0 0 1 15.5 25 Z" fill="currentColor" className="text-primary"/>
-          <path d="M15.5 25 A4.5 4.5 0 0 1 24 25 Z" fill="#fff"/>
-          <path d="M24 25 A4.5 4.5 0 0 1 32.5 25 Z" fill="#fff"/>
-          <path d="M32.5 25 A4.5 4.5 0 0 1 41 25 Z" fill="currentColor" className="text-primary"/>
-        </g>
-        <path d="M7 25 H41" stroke="#000" strokeWidth="1.6"/>
-        {/* central diamond */}
-        <path d="M24 17.5 L26.8 21 L24 24.5 L21.2 21 Z" fill="currentColor" className="text-primary" stroke="#000" strokeWidth="1.2" strokeLinejoin="round"/>
       </svg>
       <div className="leading-none">
         <span className={`${compact ? "text-sm" : "text-lg"} block font-semibold uppercase tracking-[0.16em] text-foreground`}>Umbrella</span>
