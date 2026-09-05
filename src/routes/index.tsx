@@ -84,6 +84,52 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   return <div className="mb-5 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-primary"><span className="h-px w-8 bg-primary" />{children}</div>;
 }
 
+function shortenAddress(address: string) {
+  return `${address.slice(0, 6)}...${address.slice(-4)}`;
+}
+
+function ContractAddress() {
+  const [copied, setCopied] = React.useState(false);
+
+  const handleCopy = () => {
+    if (!CONTRACT_ADDRESS) return;
+    navigator.clipboard.writeText(CONTRACT_ADDRESS);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  };
+
+  return (
+    <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-3 py-1.5 backdrop-blur-sm">
+      <button
+        type="button"
+        onClick={handleCopy}
+        disabled={!CONTRACT_ADDRESS}
+        aria-label={CONTRACT_ADDRESS ? "Copy contract address" : "Contract address coming soon"}
+        className="grid h-6 w-6 place-items-center rounded-full border border-border bg-background text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary disabled:cursor-not-allowed disabled:opacity-40"
+      >
+        {copied ? <Check className="h-3 w-3 text-primary" /> : <Copy className="h-3 w-3" />}
+      </button>
+      <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+        {CONTRACT_ADDRESS ? (
+          <>
+            CA{" "}
+            <a
+              href={`${ROBINHOOD_CHAIN_EXPLORER_URL}/address/${CONTRACT_ADDRESS}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary transition-colors hover:text-primary/80"
+            >
+              {shortenAddress(CONTRACT_ADDRESS)}
+            </a>
+          </>
+        ) : (
+          "CA: Coming soon"
+        )}
+      </span>
+    </div>
+  );
+}
+
 function Index() {
   return (
     <main className="min-h-screen overflow-hidden bg-background text-foreground">
