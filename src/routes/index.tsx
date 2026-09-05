@@ -154,7 +154,10 @@ function Index() {
         <div className="relative mx-auto w-full max-w-7xl px-5 py-20 lg:px-8">
           <div className="mx-auto max-w-5xl text-center">
             <div className="mb-10 inline-flex animate-drift"><UmbrellaMark /></div>
-            <Badge variant="outline" className="mb-8 border-border bg-card/60 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Powered by Robinhood Chain</Badge>
+            <Badge variant="outline" className="mb-5 border-border bg-card/60 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Powered by Robinhood Chain</Badge>
+            <div className="mb-8">
+              <ContractAddress />
+            </div>
             <h1 className="text-balance text-5xl font-semibold leading-[1.02] tracking-normal sm:text-7xl lg:text-[96px]">When it rains, <span className="text-primary">we allocate.</span></h1>
             <p className="mx-auto mt-7 max-w-2xl text-balance text-base leading-7 text-muted-foreground sm:text-lg">An on-chain treasury for ETH, tokenized equities, and strategic capital allocation on Robinhood Chain.</p>
             <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
