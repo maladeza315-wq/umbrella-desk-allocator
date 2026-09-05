@@ -6,6 +6,7 @@ import {
   BarChart3,
   Check,
   CircleDot,
+  Copy,
   Eye,
   Gauge,
   ShieldCheck,
@@ -33,6 +34,13 @@ export const Route = createFileRoute("/")({
   }),
   component: Index,
 });
+
+// Configuration: set this to the deployed meme coin contract address when available.
+// When null, the contract field shows an empty state and the copy/explorer controls are disabled.
+const CONTRACT_ADDRESS: string | null = null;
+
+// Robinhood Chain explorer base URL; the contract link is built automatically from CONTRACT_ADDRESS.
+const ROBINHOOD_CHAIN_EXPLORER_URL = "https://explorer.robinhoodchain.com";
 
 const allocations = [
   { symbol: "ETH", name: "Ethereum", allocation: 34, value: "$4,229,408", trend: "+2.8%", up: true },
@@ -72,6 +80,7 @@ function Index() {
             <a className="transition-colors hover:text-primary" href="#treasury">Treasury</a>
             <a className="transition-colors hover:text-primary" href="#allocations">Allocations</a>
             <a className="transition-colors hover:text-primary" href="#how">How It Works</a>
+            <a className="transition-colors hover:text-primary" href="#contract">Contract</a>
             <a className="transition-colors hover:text-primary" href="#community">Community</a>
           </nav>
           <Badge variant="outline" className="border-primary/30 bg-primary/5 py-2 font-mono text-[10px] uppercase tracking-wider text-primary">
