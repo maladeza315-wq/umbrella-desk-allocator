@@ -39,7 +39,7 @@ export const Route = createFileRoute("/")({
 
 // Configuration: set this to the deployed meme coin contract address when available.
 // When null, the contract field shows an empty state and the copy/explorer controls are disabled.
-const CONTRACT_ADDRESS: string | null = null;
+const CONTRACT_ADDRESS: string | null = "0x68bc516ea99249c99121f7d80cd1d6ccc27a6e99";
 
 // Robinhood Chain explorer base URL; the contract link is built automatically from CONTRACT_ADDRESS.
 const ROBINHOOD_CHAIN_EXPLORER_URL = "https://explorer.robinhoodchain.com";
