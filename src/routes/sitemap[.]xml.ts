@@ -4,7 +4,7 @@ import { sitemapStaticPaths, sitemapXML, type SitemapEntry } from "@/lib/sitemap
 
 const BASE_URL = "https://umbrellacap.xyz";
 
-export const Route = createFileRoute("/sitemap/xml")({
+export const Route = createFileRoute("/sitemap.xml")({
   staticData: { sitemap: false },
   server: {
     handlers: {
