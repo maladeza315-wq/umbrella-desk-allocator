@@ -94,7 +94,6 @@ function Index() {
             <a className="transition-colors hover:text-primary" href="#treasury">Treasury</a>
             <a className="transition-colors hover:text-primary" href="#allocations">Allocations</a>
             <a className="transition-colors hover:text-primary" href="#how">How It Works</a>
-            <a className="transition-colors hover:text-primary" href="#contract">Contract</a>
             <a className="transition-colors hover:text-primary" href="#community">Community</a>
           </nav>
           <Badge variant="outline" className="border-primary/30 bg-primary/5 py-2 font-mono text-[10px] uppercase tracking-wider text-primary">
