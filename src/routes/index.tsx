@@ -55,7 +55,7 @@ function UmbrellaMark({ compact = false }: { compact?: boolean }) {
     <div className="flex items-center gap-3" aria-label="Umbrella Capital">
       <svg
         className={`${compact ? "h-8 w-8" : "h-12 w-12"} overflow-visible`}
-        viewBox="0 0 48 48"
+        viewBox="4 3 40 27"
         preserveAspectRatio="xMidYMid meet"
         fill="none"
         aria-hidden="true"
